@@ -1,43 +1,23 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import FixedHeader from './FixedHeader';
 import styled from 'styled-components';
 import GlobalSearch from './GlobalSearch';
-import { debounce } from 'lodash';
+import FixedHeaderWrapper from './FixedHeaderWrapper';
+import { FormSearchWithOption } from '../common/forms/FormSearch';
 
 const HeaderBlock = styled.header`
   --fixed-header-height: 72px;
 `;
 
-const Header = () => {
-  const [isScrolling, setisScrolling] = useState(false);
-  const [isGlobalSearchOpen, setIsGlobalSearchOpen] = useState(false);
-  const globalSearchRef = useRef(null);
-  const targetY = useRef(null);
-
-  useEffect(() => {
-    if (globalSearchRef.current) {
-      targetY.current = globalSearchRef.current.offsetHeight;
-    }
-  }, []);
-
-  const handleScroll = useCallback(() => {
-    console.log('스크롤');
-
-    if (!isScrolling && window.scrollY > targetY.current) setisScrolling(true);
-    if (isScrolling && window.scrollY <= targetY.current) setisScrolling(false);
-  }, [isScrolling]);
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-  }, [handleScroll]);
-
+const Header = ({ noGlobalSearch }) => {
   return (
     <HeaderBlock>
-      <FixedHeader isScrolling={isScrolling} />
-      <GlobalSearch
-        globalSearchRef={globalSearchRef}
-        isScrolling={isScrolling}
-      />
+      <FixedHeaderWrapper />
+      {noGlobalSearch || (
+        <GlobalSearch>
+          <FormSearchWithOption
+            optionList={['중고거래', '동네업체', '알바', '중고차', '부동산']}
+          />
+        </GlobalSearch>
+      )}
     </HeaderBlock>
   );
 };

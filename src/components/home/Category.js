@@ -5,8 +5,9 @@ import 'swiper/css';
 import { Link } from 'react-router-dom';
 import { IconSwiperNext, IconSwiperPrev } from '../common/Icons';
 import styled, { css } from 'styled-components';
-import { mq, rem } from '../../lib/styles/variables';
+import { media, mq, rem } from '../../lib/styles/variables';
 import palette from '../../lib/styles/palette';
+import { NotMedium } from '../common/layouts/Responsive';
 
 const CATEGORY_LIST = [
   '디지털기기',
@@ -33,6 +34,12 @@ const CATEGORY_LIST = [
 
 const CategoryBlock = styled.section`
   padding: 20px 0 90px;
+  ${media('large')} {
+    padding: 15px 0 75px;
+  }
+  ${media('small')} {
+    padding: 10px 0 60px;
+  }
 `;
 
 const Heading = styled.h2`
@@ -42,22 +49,29 @@ const Heading = styled.h2`
 `;
 
 const SwiperWrapper = styled.div`
+  --slide-width: 160px;
   position: relative;
+
+  ${media('large')} {
+    --slide-width: 145px;
+  }
+  ${media('small')} {
+    --slide-width: 108px;
+  }
 `;
 
 const SwiperBlock = styled(Swiper)`
   padding: 2px;
+
+  ${media('medium')} {
+    margin: 0 calc(var(--inner-padding) * -1);
+    padding: 2px 0;
+  }
 `;
 
 const Slide = styled(SwiperSlide)`
   text-align: center;
-  width: 160px;
-  a {
-    height: 196px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+  width: var(--slide-width);
   .img-box {
     aspect-ratio: 1/1;
     background-color: ${palette.gray[2]};
@@ -65,7 +79,6 @@ const Slide = styled(SwiperSlide)`
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-
     img {
       transition: 0.2s;
     }
@@ -76,8 +89,10 @@ const Slide = styled(SwiperSlide)`
     }
   }
   span {
+    display: block;
     font-weight: 500;
     font-size: ${rem(14)};
+    padding-top: ${rem(10)};
     line-height: 1.6;
   }
 `;
@@ -105,7 +120,7 @@ const NextOverlay = styled(Overlay)`
 
 const NavButton = styled.button`
   position: absolute;
-  top: calc(160px / 2); // 이미지 박스 높이 / 2
+  top: calc(var(--slide-width) / 2);
   left: 50%;
   background-color: ${palette.gray[0]};
   width: 50px;
@@ -134,7 +149,11 @@ const swiperProps = {
   slidesOffsetAfter: 16,
   slidesOffsetBefore: 16,
   breakpoints: {
-    [mq.tablet]: {
+    [mq.small]: {
+      slidesOffsetAfter: 40,
+      slidesOffsetBefore: 40,
+    },
+    [mq.medium]: {
       allowTouchMove: false,
       slidesOffsetAfter: 0,
       slidesOffsetBefore: 0,
@@ -189,16 +208,18 @@ const Category = () => {
               </Slide>
             ))}
           </SwiperBlock>
-          <PrevOverlay ref={prevOverlayRef} hide={isSwiperBeginning}>
-            <NavButton onClick={() => swiperRef.current?.swiper.slidePrev()}>
-              <IconSwiperPrev $fz="1.3em" />
-            </NavButton>
-          </PrevOverlay>
-          <NextOverlay ref={nextOverlayRef} hide={isSwiperEnd}>
-            <NavButton onClick={() => swiperRef.current?.swiper.slideNext()}>
-              <IconSwiperNext $fz="1.3em" />
-            </NavButton>
-          </NextOverlay>
+          <NotMedium>
+            <PrevOverlay ref={prevOverlayRef} hide={isSwiperBeginning}>
+              <NavButton onClick={() => swiperRef.current?.swiper.slidePrev()}>
+                <IconSwiperPrev $fz="1.3em" />
+              </NavButton>
+            </PrevOverlay>
+            <NextOverlay ref={nextOverlayRef} hide={isSwiperEnd}>
+              <NavButton onClick={() => swiperRef.current?.swiper.slideNext()}>
+                <IconSwiperNext $fz="1.3em" />
+              </NavButton>
+            </NextOverlay>
+          </NotMedium>
         </SwiperWrapper>
       </Inner>
     </CategoryBlock>

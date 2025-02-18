@@ -2,9 +2,10 @@ import palette from './palette';
 
 /* Responsive */
 export const mq = {
-  laptop: 1024,
-  tablet: 768,
-  mobile: 400,
+  large: 1200,
+  medium: 992,
+  small: 768,
+  // mobile: 400,
 };
 
 export const media = (breakpoint) =>
@@ -26,3 +27,4 @@ export const verticalLine = (option) => `
     height: ${option?.height || '100%'};
     background-color: ${palette.gray[4]};
   }`;
+

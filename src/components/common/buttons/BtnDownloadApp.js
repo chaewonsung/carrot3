@@ -1,39 +1,64 @@
-import React from 'react';
-import { BtnSymbol, BtnSymbolDark } from './Button.style';
+import React, { useState } from 'react';
+import { ButtonSymbol, ButtonSymbolDark } from './Button.style';
 import styled from 'styled-components';
-import { rem } from '../../../lib/styles/variables';
+import { media, rem } from '../../../lib/styles/variables';
+import ModalTemplate from '../modal/ModalTemplate';
+import ModalDownloadApp from '../modal/ModalDownloadApp';
+import { IconSwiperNext } from '../Icons';
+import palette from '../../../lib/styles/palette';
 
-const LightButtonType = styled(BtnSymbol)`
-  font-size: ${rem(14)};
+const ButtonCarsCustom = styled.button`
+  text-decoration: underline;
+  color: ${palette.gray[8]};
+  margin-top: 0.9em;
+  .bi {
+    margin-left: 0.2em;
+  }
+
+  ${media('small')} {
+    font-size: ${rem(14)};
+  }
 `;
 
-const ImageType = styled.div`
-  display: flex;
-  gap: 5px;
-`;
+const BtnDownloadApp = ({ type, ...props }) => {
+  const [showModal, setShowModal] = useState(false);
+  const handleClick = () => setShowModal(true);
 
-const BtnDownloadApp = ({ type }) => {
   return (
     <>
       {type === 'lightButton' && (
-        <LightButtonType fw="600">앱 다운로드</LightButtonType>
+        <ButtonSymbol fw="600" {...props} onClick={handleClick}>
+          앱 다운로드
+        </ButtonSymbol>
       )}
       {type === 'darkButton' && (
-        <BtnSymbolDark fullWidth={true} fw="600">
-          당근 앱에서 보기
-        </BtnSymbolDark>
+        <ButtonSymbolDark fw="600" onClick={handleClick} {...props}>
+          {props.children || '당근 앱에서 보기'}
+        </ButtonSymbolDark>
       )}
       {type === 'image' && (
-        <ImageType>
-          <img src="images/download_app_ios.svg" alt="" />
-          <img src="images/download_app_android.svg" alt="" />
-        </ImageType>
+        <div onClick={handleClick}>
+          <img
+            src="/images/download_app_ios.svg"
+            alt=""
+            style={{ marginRight: rem(5) }}
+          />
+          <img src="/images/download_app_android.svg" alt="" />
+        </div>
       )}
-      {/* {showModal && (
-        <ModalContainer header="QR 코드 스캔" setShowModal={setShowModal}>
-          <ModalDownloadApp />
-        </ModalContainer>
-      )} */}
+      {type === 'carsCustom' && (
+        <ButtonCarsCustom onClick={handleClick}>
+          {props.children}
+          <IconSwiperNext />
+        </ButtonCarsCustom>
+      )}
+      <ModalTemplate
+        showModal={showModal}
+        setShowModal={setShowModal}
+        header="QR 코드 스캔"
+      >
+        <ModalDownloadApp />
+      </ModalTemplate>
     </>
   );
 };

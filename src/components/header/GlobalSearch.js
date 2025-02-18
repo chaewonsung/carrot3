@@ -1,63 +1,56 @@
-import React from 'react';
+import React, { Children } from 'react';
 import Inner from '../common/layouts/Inner';
 import styled, { css } from 'styled-components';
-import BtnChangeAddress from '../common/buttons/BtnChangeAddress';
-import SearchForm from './SearchForm';
-import { rem } from '../../lib/styles/variables';
+import { media, rem } from '../../lib/styles/variables';
 import FavSearchKeyword from './FavSearchKeyword';
-import palette from '../../lib/styles/palette';
+import { NotMedium } from '../common/layouts/Responsive';
+import BtnChangeAddress from './BtnChangeAddress';
 
 const GlobalSearchBlock = styled.div`
-  --height: 80px;
+  --global-search-height: 80px;
   background-color: #fff;
   .content {
+    height: var(--global-search-height);
     display: flex;
     gap: ${rem(10)};
     align-items: flex-start;
-    height: var(--height);
   }
   .search {
     flex: 1;
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 0;
     > *:nth-child(2) {
       flex: 1;
     }
   }
 
-  ${({ isScrolling }) =>
-    isScrolling &&
-    css`
-      position: fixed;
-      top: calc(var(--fixed-header-height) - var(--height));
-      width: 100%;
-      z-index: 998;
-      border-bottom: 1px solid ${palette.gray[2]};
-    `}
+  ${media('medium')} {
+    --global-search-height: 105px;
+  }
 `;
 
-const Space = styled.div`
-  height: 80px;
-`;
-
-const GlobalSearch = ({ globalSearchRef, isScrolling }) => {
+const GlobalSearch = ({ children: form, ...props }) => {
   return (
     <>
-      <GlobalSearchBlock ref={globalSearchRef} isScrolling={isScrolling}>
+      <GlobalSearchBlock {...props}>
         <Inner>
           <div className="content">
-            <BtnChangeAddress />
+            <NotMedium>
+              <BtnChangeAddress />
+            </NotMedium>
             <div className="search">
-              <SearchForm />
+              {form}
               <FavSearchKeyword />
             </div>
           </div>
         </Inner>
       </GlobalSearchBlock>
-      {isScrolling && <Space />}
     </>
   );
 };
+
+GlobalSearch.style = GlobalSearchBlock;
 
 export default GlobalSearch;

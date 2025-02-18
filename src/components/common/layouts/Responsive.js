@@ -1,29 +1,29 @@
 import { useMediaQuery } from 'react-responsive';
 import { mq } from '../../../lib/styles/variables';
 
-export const Laptop = ({ children }) => {
-  const IsLaptop = useMediaQuery({ query: `(max-width:${mq.laptop}px)` });
-  return <>{IsLaptop && children}</>;
+export const Medium = ({ children }) => {
+  const IsMedium = useMediaQuery({ query: `(max-width:${mq.medium}px)` });
+  return <>{IsMedium && children}</>;
 };
-export const NotLaptop = ({ children }) => {
-  const isNotLaptop = useMediaQuery({
-    query: `(min-width:${mq.laptop + 1}px)`,
+export const NotMedium = ({ children }) => {
+  const isNotMedium = useMediaQuery({
+    query: `(min-width:${mq.medium + 1}px)`,
   });
-  return <>{isNotLaptop && children}</>;
+  return <>{isNotMedium && children}</>;
 };
 
-export const Tablet = ({ children }) => {
-  const IsTablet = useMediaQuery({ query: `(max-width:${mq.tablet}px)` });
-  return <>{IsTablet && children}</>;
+export const Small = ({ children }) => {
+  const IsSmall = useMediaQuery({ query: `(max-width:${mq.small}px)` });
+  return <>{IsSmall && children}</>;
 };
-export const NotTablet = ({ children }) => {
-  const isNotTablet = useMediaQuery({
-    query: `(min-width:${mq.tablet + 1}px)`,
+export const NotSmall = ({ children }) => {
+  const isNotSmall = useMediaQuery({
+    query: `(min-width:${mq.small + 1}px)`,
   });
-  return <>{isNotTablet && children}</>;
+  return <>{isNotSmall && children}</>;
 };
 
-export const Mobile = ({ children }) => {
-  const IsMobile = useMediaQuery({ query: `(max-width:${mq.mobile}px)` });
-  return <>{IsMobile && children}</>;
-};
+// export const Mobile = ({ children }) => {
+//   const IsMobile = useMediaQuery({ query: `(max-width:${mq.mobile}px)` });
+//   return <>{IsMobile && children}</>;
+// };

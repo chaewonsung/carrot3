@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Inner from '../common/layouts/Inner';
-import { rem } from '../../lib/styles/variables';
+import { media, rem } from '../../lib/styles/variables';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 import Fnb from './Fnb';
@@ -24,15 +24,36 @@ const FooterBlock = styled.footer`
       color: ${palette.gray[7]};
     }
   }
+
+  ${media('medium')} {
+    .top {
+      flex-direction: column;
+      gap: ${rem(40)};
+    }
+  }
 `;
 
 const SnsList = styled.ul`
   display: flex;
   align-items: center;
-  gap: ${rem(10)};
-  margin-top: ${rem(10)};
+  gap: ${rem(20)};
+  margin-top: ${rem(20)};
+  a {
+    display: block;
+  }
   .bi {
     font-size: 1.4em;
+  }
+  .bi-youtube {
+    display: inline-block;
+    width: 1.05em;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: ${palette.gray[9]};
+    color: white;
+    &::before {
+      scale: 0.66;
+    }
   }
 `;
 
@@ -42,7 +63,7 @@ const Footer = () => {
       <Inner>
         <div className="top">
           <div>
-            <img src="images/logo.svg" alt="" width="52px" />
+            <img src="/images/logo.svg" alt="" width="52px" />
             <SnsList>
               <li>
                 <Link to="/">

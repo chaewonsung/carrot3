@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import Inner from '../common/layouts/Inner';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { rem } from '../../lib/styles/variables';
+import { media, rem } from '../../lib/styles/variables';
 
 const SLIDES = [
   {
@@ -38,6 +38,9 @@ const SLIDES = [
 ];
 
 const MainBannerBlock = styled.section`
+  .inner {
+    padding: 0;
+  }
   .content {
     position: relative;
     overflow: hidden;
@@ -47,6 +50,7 @@ const MainBannerBlock = styled.section`
 
 const SwiperBlock = styled(Swiper)`
   --swiper-navigation-size: 30px;
+  --swiper-navigation-sides-offset: 20px;
   --swiper-navigation-color: ${palette.gray[9]};
 
   --swiper-pagination-color: ${palette.gray[9]};
@@ -59,14 +63,31 @@ const SwiperBlock = styled(Swiper)`
 
   .swiper-pagination {
     width: auto !important;
-    padding: 0 80px;
+    padding: 0 var(--inner-padding);
+  }
+  [class*='swiper-button'] {
+    font-weight: 700;
+  }
+
+  ${media('large')} {
+    height: 430px;
+  }
+  ${media('medium')} {
+    height: 390px;
+    [class*='swiper-button'] {
+      display: none;
+    }
+  }
+  ${media('small')} {
+    --swiper-pagination-bottom: 16px;
+    height: 340px;
   }
 `;
 
 const Slide = styled(SwiperSlide)`
   white-space: pre;
   font-weight: 600;
-  padding: 0 80px;
+  padding: 0 var(--inner-padding);
   p:first-child {
     font-size: 42px;
     line-height: 1.3;
@@ -75,6 +96,34 @@ const Slide = styled(SwiperSlide)`
   p:last-child {
     font-size: ${rem(20)};
     line-height: 1.5;
+  }
+
+  ${media('large')} {
+    p:first-child {
+      font-size: ${rem(34)};
+      margin: 40px 0 15px;
+    }
+    p:last-child {
+      font-size: ${rem(18)};
+    }
+  }
+  ${media('medium')} {
+    p:first-child {
+      font-size: ${rem(32)};
+      margin: 30px 0 15px;
+    }
+    p:last-child {
+      font-size: ${rem(15)};
+    }
+  }
+  ${media('small')} {
+    p:first-child {
+      font-size: ${rem(24)};
+      margin-top: 20px;
+    }
+    p:last-child {
+      display: none;
+    }
   }
 `;
 
@@ -114,7 +163,7 @@ const MainBanner = () => {
 
 const Img = styled.img`
   position: absolute;
-  right: 0;
+  right: var(--inner-padding);
   bottom: 0;
   height: 110%;
 
@@ -127,6 +176,13 @@ const Img = styled.img`
   }
   &.active + img {
     transform: translateX(0);
+  }
+
+  ${media('medium')} {
+    right: 0;
+  }
+  ${media('small')} {
+    height: 90%;
   }
 `;
 

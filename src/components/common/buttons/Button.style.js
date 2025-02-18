@@ -9,11 +9,11 @@ export const Button = styled.button.withConfig({
   text-align: center;
   width: ${({ fullWidth }) => (fullWidth ? '100%' : null)};
   font-weight: ${({ fw }) => fw || null};
-  border-radius: ${({ round }) => (round ? '99px' : '3px')};
+  border-radius: ${({ round }) => (round ? '99px' : '5px')};
   font-size: ${({ fz }) => fz || null};
 `;
 
-const ButtonSymbol = styled(Button)`
+export const ButtonSymbol = styled(Button)`
   background-color: ${palette.carrot[0]};
   color: ${palette.carrot[6]};
   &:hover {
@@ -21,7 +21,7 @@ const ButtonSymbol = styled(Button)`
   }
 `;
 
-const ButtonSymbolDark = styled(Button)`
+export const ButtonSymbolDark = styled(Button)`
   background-color: ${palette.carrot[5]};
   color: ${palette.gray[0]};
   &:hover {
@@ -29,26 +29,13 @@ const ButtonSymbolDark = styled(Button)`
   }
 `;
 
-const ButtonGray = styled(Button)`
+export const ButtonGray = styled(Button)`
   background-color: ${palette.gray[3]};
 `;
 
-const ButtonGrayHover = styled(Button)`
+export const ButtonGrayHover = styled(Button)`
   background-color: ${palette.gray[2]};
   &:hover {
     background-color: ${palette.gray[3]};
   }
 `;
-
-export const BtnSymbol = (props) => (
-  <ButtonSymbol {...props}>{props.children}</ButtonSymbol>
-);
-export const BtnSymbolDark = (props) => (
-  <ButtonSymbolDark {...props}>{props.children}</ButtonSymbolDark>
-);
-export const BtnGray = (props) => (
-  <ButtonGray {...props}>{props.children}</ButtonGray>
-);
-export const BtnGrayHover = (props) => (
-  <ButtonGrayHover {...props}>{props.children}</ButtonGrayHover>
-);

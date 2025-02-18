@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Logo = () => {
   return (
     <Link to="/">
-      <img src="images/logo.svg" alt="" />
+      <img src="/images/logo.svg" alt="" />
     </Link>
   );
 };

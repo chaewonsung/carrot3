@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import Header from '../components/header/Header';
-import { Outlet } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import DownloadAppBanner from '../components/DownloadAppBanner';
 import Footer from '../components/footer/Footer';
 
-const MainLayout = () => {
+const MainLayout = ({ noGlobalSearch, children }) => {
   return (
     <>
-      <Header />
+      <ScrollToTop />
+      <Header noGlobalSearch={noGlobalSearch} />
       <main>
-        <Outlet />
+        {children}
         <DownloadAppBanner />
       </main>
       <Footer />
     </>
   );
+};
+
+export const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
 };
 
 export default MainLayout;

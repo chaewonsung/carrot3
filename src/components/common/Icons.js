@@ -4,6 +4,7 @@ const Icon = styled.i`
   display: inline-block;
   font-size: ${({ $fz }) => $fz || null};
   scale: ${({ $scale }) => $scale || null};
+  color: inherit;
 `;
 
 export const IconArrowUpRight = (props) => (
@@ -38,4 +39,10 @@ export const IconSwiperPrev = (props) => (
 );
 export const IconFilter = (props) => (
   <Icon className="bi bi-filter icon-filter" {...props}></Icon>
+);
+export const IconHeartFill = (props) => (
+  <Icon className="bi bi-heart-fill icon-heart-fill" {...props}></Icon>
+);
+export const IconChat = (props) => (
+  <Icon className="bi bi-chat-dots-fill icon-chat" {...props}></Icon>
 );

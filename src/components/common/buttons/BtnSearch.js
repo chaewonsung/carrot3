@@ -11,9 +11,9 @@ const BtnSearchBlock = styled.button`
   }
 `;
 
-const BtnSearch = () => {
+const BtnSearch = (props) => {
   return (
-    <BtnSearchBlock aria-label="검색 버튼">
+    <BtnSearchBlock aria-label="검색 버튼" {...props} type="button">
       <IconSearch />
     </BtnSearchBlock>
   );

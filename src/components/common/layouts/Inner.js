@@ -3,20 +3,25 @@ import styled from 'styled-components';
 import { media } from '../../../lib/styles/variables';
 
 const InnerBlock = styled.div`
+  --inner-padding: 64px;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 64px;
+  padding: 0 var(--inner-padding);
   box-sizing: content-box;
-  ${media('laptop')} {
-    padding: 0 40px;
+  ${media('medium')} {
+    --inner-padding: 40px;
   }
-  ${media('tablet')} {
-    padding: 0 16px;
+  ${media('small')} {
+    --inner-padding: 16px;
   }
 `;
 
-const Inner = ({ children }) => {
-  return <InnerBlock>{children}</InnerBlock>;
+const Inner = (props) => {
+  return (
+    <InnerBlock className="inner" {...props}>
+      {props.children}
+    </InnerBlock>
+  );
 };
 
 export default Inner;

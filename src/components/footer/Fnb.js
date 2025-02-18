@@ -2,7 +2,7 @@ import React from 'react';
 import { IconArrowUpRight } from '../common/Icons';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { rem } from '../../lib/styles/variables';
+import { media, rem } from '../../lib/styles/variables';
 import palette from '../../lib/styles/palette';
 
 const FnbBlock = styled.ul`
@@ -33,6 +33,15 @@ const FnbBlock = styled.ul`
       &:hover {
         color: ${palette.gray[7]};
       }
+    }
+  }
+
+  ${media('medium')} {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: auto;
+    > li {
+      width: auto;
     }
   }
 `;
